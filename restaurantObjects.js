@@ -68,7 +68,7 @@ Drink.prototype.toString = function() {
 	};		
 	return this.name + " is a " + this.description + " that costs $" +this.price  + " and is made with " + drinkIngredients + " and " + lastDrinkIngredient + "."
 }
-var mimosa = new Drink("Mimosa", "Breakfast drink", 8.00, [orangeJuice, champagne, cheese, carrots]);
+var mimosa = new Drink("Mimosa", "breakfast drink", 8.00, [orangeJuice, champagne]);
 console.log(mimosa.toString());
 
 
@@ -79,13 +79,38 @@ var Plate = function(name, description, price, ingredients) {
 	this.ingredients =  ingredients
 }
 
+Plate.prototype.toString = function () {
+	var plateIngredients = ""
+	for (var i = 0; i < this.ingredients.length; i++) {
+		if ( (i === 0) && (this.ingredients.length === 2)  ) {
+			plateIngredients += this.ingredients[i].foodType
+		}
+		else if (i < this.ingredients.length-1) {
+			plateIngredients += this.ingredients[i].foodType +", "
 
-
-
-
-var Order = function(plate) {
-	this.plate = plate
+		} else{
+			var lastPlateIngredient = this.ingredients[i].foodType
+		};		
+	};		
+	return this.name + " is a dinner of " + this.description + " that costs $" +this.price  + " and is made with " + plateIngredients + " and " + lastPlateIngredient + "."
 }
+
+var cheeseSteak = new Plate("Cheese Steak", "cheese covered steak with carrots", 16.99, [steak, carrots, cheese]);
+console.log(cheeseSteak.toString());
+
+
+
+var Order = function(plate, drink) {
+	this.plate = plate
+	this.drink = drink
+}
+
+Order.prototype.toString() {
+	return "Your order consists of " + this.plate + " and a " + this.drink + "."
+}
+
+var steakAndMimosa = new Order(cheeseSteak, mimosa);
+console.log(steakAndMimosa.toString());
 
 // var Menu = function(plate) {
 // 	this.plate =
@@ -104,5 +129,5 @@ var Order = function(plate) {
 
 
 
-var cheeseSteak = new Plate("Cheese Steak", "Cheese covered steak with carrots", 16.99, [steak, carrots, cheese]);
+
 
